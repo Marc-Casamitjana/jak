@@ -1,0 +1,17 @@
+<div class="chat">
+	<section *ngIf="showChat" class="chat-window">
+		<button (click)="closeChat()">Close</button>
+		<button (click)="cleanChat()">Clean</button>
+		<div class="messages-container">
+      <div *ngFor="let msg of messagesCollection" class="message">
+        <span>{{msg.content}}</span>
+      </div>
+		</div>
+		<form [formGroup]="chatForm" (ngSubmit)="addMessage()">
+			<div class="input-box">
+				<input formControlName="input" type="text">
+    </div>
+		</form>
+	</section>
+	<button (click)="newChat()" class="btn">New chat</button>
+</div>

@@ -1,0 +1,29 @@
+/* Add application styles & imports to this file! */
+@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.input-box {
+    margin-top: 15px;
+    height: 30px;
+    width: 35vw;
+    background-color: rgb(208, 208, 255);
+    border-radius: 3px;
+
+    input {
+      height: 100%;
+      width: 100%;
+      border:none;
+      background-image:none;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      background-color: rgba(255, 255, 255, 0)
+    }
+}
