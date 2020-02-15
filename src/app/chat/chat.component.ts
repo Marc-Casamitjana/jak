@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ChatService } from './chat.service';
+import { tap } from 'rxjs/operators';
 
 export interface Message {
   content: string;
@@ -15,12 +17,15 @@ export interface Message {
 
 export class ChatComponent implements OnInit {
   chatForm: FormGroup;
-  showChat: boolean = false;
-  messagesCollection: Message[] = []
-  constructor() { }
+  showChat: boolean;
+  messagesCollection: Message[] = [];
+
+  constructor(private chatService: ChatService) { }
 
   newChat() {
     this.showChat = true;
+    this.chatService.connect();
+
   }
 
   closeChat() {
@@ -32,17 +37,23 @@ export class ChatComponent implements OnInit {
   }
 
   addMessage() {
-    let message: Message = {
+    const message: Message = {
       content: this.chatForm.get('input').value
-    }
+    };
     this.messagesCollection.push(message);
     this.chatForm.get('input').reset();
+    this.chatService.sendMessage(message);
+    this.chatService.getMessages().subscribe(e => {
+      let x = e;
+      console.log(e)
+    });
   }
 
   ngOnInit() {
     this.chatForm = new FormGroup({
       input: new FormControl('')
     });
+
   }
 
 }
