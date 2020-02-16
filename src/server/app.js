@@ -11,16 +11,22 @@ app.use((req, res, next) => {
 });
 
 io.on('connection', function (socket) {
-  console.log('a user connected');
+  console.log(`user ${socket.id} connected`);
+  // socket.join(`${socket.id}`, () => {
+    console.log(Object.keys(socket.rooms));
+
+  // });
+
+  socket.on('say to someone', (msg, id) => {
+    console.log('messag', msg, id);
+    
+    // send a private message to the socket with the given id
+    // socket.to(id).emit('my message', msg);
+  });
+
   socket.on('add-message', (msg) => {
     io.emit('new-message', msg);
-    console.log('message:', msg);
-    
   });
-});
-
-app.get('/', function (req, res) {
-  res.send('<h1>Hello world</h1>');
 });
 
 app.get('/connect', function (req, res) {
