@@ -12,9 +12,10 @@ app.use((req, res, next) => {
 
 io.on('connection', function (socket) {
   console.log('a user connected');
-
-  socket.on('new-message', (msg) => {
-    io.emit(msg);
+  socket.on('add-message', (msg) => {
+    io.emit('new-message', msg);
+    console.log('message:', msg);
+    
   });
 });
 
