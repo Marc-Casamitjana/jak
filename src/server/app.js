@@ -24,7 +24,9 @@ io.on('connection', function (socket) {
     // socket.to(id).emit('my message', msg);
   });
 
-  socket.on('add-message', (msg) => {
+  socket.on('add-message', (msg) => {  
+    console.log(msg);
+    msg.time = new Date();
     io.emit('new-message', msg);
   });
 });
@@ -33,6 +35,4 @@ app.get('/connect', function (req, res) {
   console.log('aaa')
 });
 
-http.listen(3000, function () {
-  console.log('listening on *:3000');
-});
+http.listen(3000, '0.0.0.0');
