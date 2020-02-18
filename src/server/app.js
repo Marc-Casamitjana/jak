@@ -1,6 +1,10 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+const db = low(adapter);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -35,4 +39,11 @@ app.get('/connect', function (req, res) {
   console.log('aaa')
 });
 
-http.listen(3000, '0.0.0.0');
+app.get('/login', function (req, res) {
+  console.log(req);
+  
+});
+
+http.listen(3000, () => {
+  console.log('server listening to 3000')
+});

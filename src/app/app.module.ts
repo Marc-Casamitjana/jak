@@ -5,17 +5,28 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from "./app.component";
 import { ChatComponent } from "./chat/chat.component";
 import { RouterModule, Routes } from "@angular/router";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UsersComponent } from './users/users.component';
+import { AuthInterceptorService } from "./core/services/auth-interceptor.service";
+import { LoginComponent } from "./login/login.component";
+import { ModalComponent } from './core/shared/modal/modal.component';
 
 const appRoutes: Routes = [
-  { path: "room", component: ChatComponent },
-  { path: "**", redirectTo: "/", pathMatch: "full" }
+  { path: 'room', component: ChatComponent },
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),
   ReactiveFormsModule, HttpClientModule],
-  declarations: [AppComponent, ChatComponent],
+  declarations: [AppComponent, ChatComponent, UsersComponent, LoginComponent, ModalComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

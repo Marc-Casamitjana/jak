@@ -9,7 +9,7 @@ import { Message } from './chat.component';
 })
 export class ChatService {
 
-  private url = 'http://83.39.26.227:3000';
+  private url = 'http://localhost:3000';
   private socket;
 
   constructor(private http: HttpClient) {

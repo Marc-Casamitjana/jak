@@ -11,7 +11,11 @@
         <a routerLink="/" class="item">Home</a> 
         <a routerLink="/room" class="item">Room</a> 
     </div>
-	</nav>
+    <div>
+      <button (click)="openLoginModal()">Log In</button>
+    </div>
+  </nav>
+  <app-login *ngIf="isOpenModalLogin"></app-login>
 	<div class="content-wrapper">
 		<router-outlet></router-outlet>
 	</div>
