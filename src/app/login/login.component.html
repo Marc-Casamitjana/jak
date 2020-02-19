@@ -1,14 +1,18 @@
 <div class="modal">
-  <div class="form-container">
   <form [formGroup]="loginForm">
-      <div class="name">
+    <div class="form-container">
+      <button class="btn" (click)="closeModal()">Close</button>
+      <div class="controls-container">
         <label for="">Username</label>
-        <input type="text" formControlName="username">
-      </div>
-      <div class="password">
+        <div class="control">
+          <input type="text" formControlName="username">
+        </div>
         <label for="">Password</label>
-        <input type="text" formControlName="password">
+        <div class="control">
+          <input type="text" formControlName="password">
+
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

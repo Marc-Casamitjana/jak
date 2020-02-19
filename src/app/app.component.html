@@ -1,4 +1,5 @@
-<main class="backdrop">
+<main>
+  <div class="backdrop" [ngClass]="{'backdrop-open': isOpenModalLogin}"></div>
 	<nav class="navbar">
 		<div class="navbar-top">
 			<div class="logo-container">
@@ -15,7 +16,7 @@
       <button (click)="openLoginModal()">Log In</button>
     </div>
   </nav>
-  <app-login *ngIf="isOpenModalLogin"></app-login>
+  <app-login [@inOutAnimation] (isOpenModalLogin)="this.closeLoginModal()" *ngIf="isOpenModalLogin"></app-login>
 	<div class="content-wrapper">
 		<router-outlet></router-outlet>
 	</div>

@@ -4,4 +4,40 @@
     justify-content: center;
     display: flex;
     width: 100%;
+    z-index: 2;
+    
+}
+
+.form-container {
+  height: 200px;
+    width: 350px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: -7px 8px 2px 0px rgba(0, 0, 0, 0.75);
+}
+
+.btn {
+  width: 50px;
+  position: absolute;
+  top: 0;
+}
+
+input {
+  box-sizing: border-box;
+	text-decoration:none;
+	box-shadow:none;
+  border: none;
+  background-color: rgb(196, 196, 196);
+}
+
+.controls-container {
+  margin: 10px 0 10px;
+  font-family: 'Tomorrow', sans-serif;
+  text-align: center;
+}
+
+.control {
+  margin: 5px 0 10px;
 }
