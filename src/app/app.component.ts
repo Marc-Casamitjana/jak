@@ -6,11 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
-  isOpenModalLogin: boolean = false;
+  isOpenModalLogin = false;
   name = 'Angular';
 
   openLoginModal() {
     this.isOpenModalLogin = !this.isOpenModalLogin;
+  }
+
+  closeLoginModal() {
+    this.isOpenModalLogin = false;
   }
 }
 

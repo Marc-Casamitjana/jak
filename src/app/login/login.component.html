@@ -1,6 +1,7 @@
 <div class="modal">
   <div class="form-container">
   <form [formGroup]="loginForm">
+    <button (click)="closeModal()">Close</button>
       <div class="name">
         <label for="">Username</label>
         <input type="text" formControlName="username">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -8,8 +8,12 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  @Output() isOpenModalLogin: EventEmitter<void> = new EventEmitter();
   constructor() { }
+
+  closeModal() {
+    this.isOpenModalLogin.emit();
+  }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
