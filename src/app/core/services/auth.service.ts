@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as jwt from 'jsonwebtoken';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 export interface User {
