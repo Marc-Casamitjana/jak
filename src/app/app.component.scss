@@ -1,10 +1,17 @@
 .backdrop {
   &-open {
+<<<<<<< HEAD
     background-color: rgba(128, 128, 128, 0.404);
     height: 100vh;
     width: 100vw;
     position: fixed;
     z-index: 1;
+=======
+    visibility: visible;
+    background-color: grey;
+    height: 100vh;
+    width: 100vw;
+>>>>>>> ffb6a45387b70eb69397b26548223a379eb2ff02
   }
 }
 
