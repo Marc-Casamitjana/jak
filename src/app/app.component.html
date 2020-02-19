@@ -1,27 +1,29 @@
 <main>
-  <div class="backdrop" [ngClass]="{'backdrop-open': isOpenModalLogin}"></div>
-	<nav class="navbar">
-		<div class="navbar-top">
-			<div class="logo-container">
-				<img
-    class="logo" src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
-    alt="">
+  <div class="backdrop" [ngClass]="{ 'backdrop-open': isOpenModalLogin }"></div>
+  <nav class="navbar">
+    <div class="navbar-top">
+      <div class="logo-container">
+        <img
+          class="logo"
+          src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
+          alt=""
+        />
       </div>
     </div>
     <div class="navbar-items">
-        <a routerLink="/" class="item">Home</a> 
-        <a routerLink="/room" class="item">Room</a> 
+      <a routerLink="/" class="item">Home</a>
+      <a routerLink="/room" class="item">Room</a>
     </div>
     <div>
       <button (click)="openLoginModal()">Log In</button>
     </div>
   </nav>
-<<<<<<< HEAD
-  <app-login [@inOutAnimation] (isOpenModalLogin)="this.closeLoginModal()" *ngIf="isOpenModalLogin"></app-login>
-=======
-  <app-login (isOpenModalLogin)="this.closeLoginModal()" *ngIf="isOpenModalLogin"></app-login>
->>>>>>> ffb6a45387b70eb69397b26548223a379eb2ff02
-	<div class="content-wrapper">
-		<router-outlet></router-outlet>
-	</div>
+  <app-login
+    [@inOutAnimation]
+    (isOpenModalLogin)="this.closeLoginModal()"
+    *ngIf="isOpenModalLogin"
+  ></app-login>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </main>

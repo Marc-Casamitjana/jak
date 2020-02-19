@@ -20,24 +20,11 @@ import { trigger, transition, style, animate } from "@angular/animations";
 })
 export class AppComponent {
   isOpenModalLogin = false;
-<<<<<<< HEAD
   name = "Angular";
-=======
-  name = 'Angular';
->>>>>>> ffb6a45387b70eb69397b26548223a379eb2ff02
 
   openLoginModal() {
     this.isOpenModalLogin = !this.isOpenModalLogin;
   }
-<<<<<<< HEAD
-=======
-
-  closeLoginModal() {
-    this.isOpenModalLogin = false;
-  }
-}
-
->>>>>>> ffb6a45387b70eb69397b26548223a379eb2ff02
 
   closeLoginModal() {
     this.isOpenModalLogin = false;
