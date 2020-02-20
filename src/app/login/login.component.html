@@ -1,7 +1,11 @@
 <div class="modal">
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm.value)">
     <div class="form-container">
-      <button class="btn" (click)="closeModal()">Close</button>
+      <img
+        src="../assets/icons/black_cross.png"
+        class="cross"
+        (click)="closeModal()"
+      />
       <div class="controls-container">
         <label for="">Username</label>
         <div class="control">
@@ -12,6 +16,7 @@
           <input type="text" formControlName="password" />
         </div>
       </div>
+      <button class="btn" type="submit">Submit</button>
     </div>
   </form>
 </div>

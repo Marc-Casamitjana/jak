@@ -1,26 +1,30 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
+import { AuthService, User } from "../core/services/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   @Output() isOpenModalLogin: EventEmitter<void> = new EventEmitter();
-  constructor() { }
+
+  constructor(private authService: AuthService) {}
 
   closeModal() {
     this.isOpenModalLogin.emit();
   }
 
-  ngOnInit() {
-    this.loginForm = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl('')
-    });
+  logIn(user: User) {
+    this.authService.login(user);
   }
 
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      username: new FormControl(""),
+      password: new FormControl("")
+    });
+  }
 }
