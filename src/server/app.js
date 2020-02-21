@@ -1,11 +1,15 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 const db = low(adapter);
+const bodyParser = require("body-parser");
 
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -13,12 +17,7 @@ app.use((req, res, next) => {
     "Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
   next();
-});
-
-app.post("/ping", function(req, res) {
-  res.send(req.body);
 });
 
 io.on("connection", function(socket) {
@@ -42,12 +41,17 @@ io.on("connection", function(socket) {
   });
 });
 
-app.get("/connect", function(req, res) {
-  console.log("aaa");
+app.get("/users", function(req, res) {
+  const payload = db.get("foo").values();
+  console.log(payload);
+
+  res.send({ payload: payload });
 });
 
-app.get("/login", function(req, res) {
-  console.log(req.body);
+app.post("/login", function(req, res) {
+  db.get("users")
+    .push(req.body)
+    .write();
 });
 
 http.listen(3000, () => {

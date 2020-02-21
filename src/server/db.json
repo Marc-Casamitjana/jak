@@ -1,6 +1,57 @@
 {
-    "user": {
+  "users": [
+    {
       "name": "root",
       "password": ""
+    },
+    {
+      "username": "dsdasfdsfs",
+      "password": "xzcxz"
+    },
+    {
+      "username": "pepito",
+      "password": "palotes"
+    },
+    {
+      "username": "dsdasfdsfs",
+      "password": "xzcxz"
+    },
+    {
+      "username": "pepito",
+      "password": "palotes"
+    },
+    {
+      "username": "yusef",
+      "password": "a"
+    },
+    {
+      "username": "yusef",
+      "password": "a"
+    },
+    {
+      "username": "sdfsd",
+      "password": "df"
+    },
+    {
+      "username": "fgfdgfd",
+      "password": "dfsd"
+    },
+    {
+      "username": "xsvv",
+      "password": "ffsf"
+    },
+    {
+      "username": "sdfsd",
+      "password": "df"
+    },
+    {
+      "username": "fgfdgfd",
+      "password": "dfsd"
+    },
+    {
+      "username": "xsvv",
+      "password": "ffsf"
     }
-  }
+  ],
+  "foo": "bar"
+}

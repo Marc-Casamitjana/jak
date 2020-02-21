@@ -1,11 +1,11 @@
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
-import { AuthService, User } from "../core/services/auth.service";
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService, User } from '../core/services/auth.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -18,13 +18,14 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(user: User) {
-    this.authService.login(user);
+    this.authService.login(user).subscribe();
+    this.loginForm.reset();
   }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      username: new FormControl(""),
-      password: new FormControl("")
+      username: new FormControl(''),
+      password: new FormControl('')
     });
   }
 }
