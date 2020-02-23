@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
 import * as jwt from 'jsonwebtoken';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 export interface User {
-  name: string;
+  username: string;
   password: string;
 }
-export const TOKEN_NAME: string = 'jwt_token';
+export const TOKEN_NAME = 'jwt_token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url: string = 'http://localhost:3000';
+  private url = 'http://localhost:3000';
   private headers = new HttpHeaders({ 'Content-type': 'application/json' });
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<User>(
+      JSON.parse(localStorage.getItem('currentUser'))
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue() {
+    return this.currentUserSubject.value;
+  }
 
   getToken(): string {
     return localStorage.getItem(TOKEN_NAME);
@@ -45,14 +56,34 @@ export class AuthService {
   //   if(date === undefined) return false;
   //   return !(date.valueOf() > new Date().valueOf());
   // }
+  register(user: User): Observable<User> {
+    return this.http.post<User>(`${this.url}/register`, user, {
+      headers: this.headers
+    });
+  }
 
-  login(user): Observable<User> {
+  login(username, password): Observable<User> {
     console.log(`${this.url}/login`);
 
     return this.http
-      .post<User>(`${this.url}/login`, JSON.stringify(user), {
-        headers: this.headers
-      })
-      .pipe(tap(res => console.log(res)));
+      .post<User>(
+        `${this.url}/login`,
+        { username, password },
+        {
+          headers: this.headers
+        }
+      )
+      .pipe(
+        map(user => {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
+        })
+      );
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 }

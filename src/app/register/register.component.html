@@ -1,0 +1,17 @@
+<form [formGroup]="registerForm" (ngSubmit)="signIn(registerForm.value)">
+  <div class="controls-container">
+    <label for="">Choose a username</label>
+    <div class="control">
+      <input type="text" formControlName="username" />
+    </div>
+    <label for="">Choose a password</label>
+    <div class="control">
+      <input type="text" formControlName="password" />
+    </div>
+    <label for="">Repeat password</label>
+    <div class="control">
+      <input type="text" formControlName="passwordRep" />
+    </div>
+    <button class="btn" type="submit">Submit</button>
+  </div>
+</form>

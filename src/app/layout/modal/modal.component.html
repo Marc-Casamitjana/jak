@@ -1,0 +1,15 @@
+<div class="modal" [ngClass]="{ 'show out': isOpen }">
+  <div class="modal-container">
+    <img
+      src="../assets/icons/black_cross.png"
+      class="cross"
+      (click)="close()"
+    />
+    <ng-template modal-host></ng-template>
+  </div>
+</div>
+<div
+  class="backdrop"
+  [ngClass]="{ 'backdrop-open': isOpen }"
+  (click)="this.close()"
+></div>

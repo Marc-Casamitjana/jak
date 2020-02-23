@@ -1,27 +1,6 @@
 <main>
-  <div class="backdrop" [ngClass]="{ 'backdrop-open': isOpenModalLogin }"></div>
-  <nav class="navbar">
-    <div class="navbar-top">
-      <div class="logo-container">
-        <img
-          class="logo"
-          src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
-          alt=""
-        />
-      </div>
-    </div>
-    <div class="navbar-items">
-      <a routerLink="/" class="item">Home</a>
-      <a routerLink="/room" class="item">Room</a>
-    </div>
-    <div>
-      <button (click)="openLoginModal()">Log In</button>
-    </div>
-  </nav>
-  <app-login
-    (isOpenModalLogin)="this.closeLoginModal()"
-    *ngIf="isOpenModalLogin"
-  ></app-login>
+  <app-navbar (openModalEvent)="openModal($event)"></app-navbar>
+  <app-modal></app-modal>
   <div class="content-wrapper">
     <router-outlet></router-outlet>
   </div>

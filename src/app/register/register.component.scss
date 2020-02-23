@@ -1,3 +1,12 @@
+.form-container {
+  height: 350px;
+  width: 350px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -7px 8px 2px 0px rgba(0, 0, 0, 0.75);
+}
+
 .btn {
   width: 90px;
   background-color: #ccb96a;
@@ -27,4 +36,10 @@ input {
     height: 25px;
     font-size: 22px;
   }
+}
+
+.cross {
+  width: 20px;
+  align-self: flex-end;
+  margin: 15px 15px 0;
 }

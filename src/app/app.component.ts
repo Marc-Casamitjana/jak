@@ -1,19 +1,27 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
+import { ModalService } from './layout/modal/modal.service';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   isOpenModalLogin = false;
-  name = "Angular";
+  isOpenModal = false;
+  openedModal: string;
+  name = 'Angular';
 
-  openLoginModal() {
-    this.isOpenModalLogin = !this.isOpenModalLogin;
-  }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private modal: ModalService
+  ) {}
 
-  closeLoginModal() {
-    this.isOpenModalLogin = false;
+  openModal(type) {
+    this.isOpenModal = true;
+    this.modal.open(type);
   }
 }

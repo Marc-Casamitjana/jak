@@ -1,8 +1,8 @@
 /* Add application styles & imports to this file! */
-@import url("https://fonts.googleapis.com/css?family=Tomorrow&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 a {
   text-decoration: none;
@@ -38,16 +38,28 @@ input {
   text-align: center;
   position: relative;
   font-weight: bold;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   cursor: pointer;
-}
-.btn:active {
-  top: 0.1em;
-  right: 0.1em;
+  &:active {
+    top: 0.2em;
+    right: 0.1em;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .cross-container {
   &:hover {
     cursor: pointer;
+  }
+}
+
+img.cross {
+  cursor: pointer;
+
+  &:active {
+    top: 0.1em;
   }
 }

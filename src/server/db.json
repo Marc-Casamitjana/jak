@@ -1,57 +1,80 @@
 {
   "users": [
     {
-      "name": "root",
+      "username": "root",
       "password": ""
     },
     {
-      "username": "dsdasfdsfs",
-      "password": "xzcxz"
+      "user": {
+        "username": "pode",
+        "password": "poder",
+        "passwordRep": null
+      }
     },
     {
-      "username": "pepito",
-      "password": "palotes"
+      "user": {
+        "username": "ja el tenim aqui ",
+        "password": "si ",
+        "passwordRep": "si"
+      }
     },
     {
-      "username": "dsdasfdsfs",
-      "password": "xzcxz"
+      "user": {
+        "username": "shakalo",
+        "password": "cann",
+        "passwordRep": "cann"
+      }
     },
     {
-      "username": "pepito",
-      "password": "palotes"
+      "user": {
+        "username": "root2",
+        "password": "root",
+        "passwordRep": ""
+      }
     },
     {
-      "username": "yusef",
-      "password": "a"
+      "user": {
+        "username": "pode",
+        "password": "poder",
+        "passwordRep": null
+      }
     },
     {
-      "username": "yusef",
-      "password": "a"
+      "user": {
+        "username": "ja el tenim aqui ",
+        "password": "si ",
+        "passwordRep": "si"
+      }
     },
     {
-      "username": "sdfsd",
-      "password": "df"
+      "username": "root2",
+      "password": "root",
+      "passwordRep": ""
     },
     {
-      "username": "fgfdgfd",
-      "password": "dfsd"
+      "username": "root2",
+      "password": "root",
+      "passwordRep": ""
     },
     {
-      "username": "xsvv",
-      "password": "ffsf"
+      "username": "Pussilànime",
+      "password": "maleit",
+      "passwordRep": ""
     },
     {
-      "username": "sdfsd",
-      "password": "df"
+      "username": "root2",
+      "password": "root",
+      "passwordRep": ""
     },
     {
-      "username": "fgfdgfd",
-      "password": "dfsd"
+      "username": "root2",
+      "password": "root",
+      "passwordRep": ""
     },
     {
-      "username": "xsvv",
-      "password": "ffsf"
+      "username": "Pussilànime",
+      "password": "maleit",
+      "passwordRep": ""
     }
-  ],
-  "foo": "bar"
+  ]
 }
