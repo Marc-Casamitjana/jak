@@ -1,12 +1,8 @@
 import {
   Component,
   OnInit,
-  Input,
-  OnChanges,
   ComponentFactoryResolver,
-  ViewChild,
-  AfterViewInit,
-  HostBinding
+  ViewChild
 } from '@angular/core';
 import { LoginComponent } from 'src/app/login/login.component';
 import { RegisterComponent } from 'src/app/register/register.component';
@@ -20,9 +16,8 @@ import { ModalService } from './modal.service';
 })
 export class ModalComponent implements OnInit {
   @ViewChild(ModalDirective, { static: true }) modalHost: ModalDirective;
-  @HostBinding('class') out: string;
 
-  isOpen = false;
+  isOpen: boolean;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -30,7 +25,6 @@ export class ModalComponent implements OnInit {
   ) {}
 
   close() {
-    this.out = 'out';
     this.isOpen = false;
   }
 
