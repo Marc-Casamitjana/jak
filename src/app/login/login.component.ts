@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService, User } from '../core/services/auth.service';
-import { first, catchError } from 'rxjs/operators';
+import { AuthService } from '../core/services/auth.service';
+import { first } from 'rxjs/operators';
 import { ModalService } from '../layout/modal/modal.service';
-import { of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +12,12 @@ import { of } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  @Output() isOpenModalLogin: EventEmitter<void> = new EventEmitter();
-  errors: string;
+  errors: any;
 
   constructor(private authService: AuthService, private modal: ModalService) {}
 
-  closeModal() {
-    this.isOpenModalLogin.emit();
+  get ctrls() {
+    return this.loginForm.controls;
   }
 
   logIn(loginForm: FormGroup) {
@@ -26,36 +25,28 @@ export class LoginComponent implements OnInit {
       this.validateForm();
       return;
     }
+    this.errors = [];
     this.authService
       .login(loginForm.value.username, loginForm.value.password)
-      .pipe(
-        first(),
-        catchError(e => {
-          console.log('error', e);
-          return of(e);
-        })
-      )
+      .pipe(first())
       .subscribe(
-        next => {
-          console.log('next', next);
-          
-          this.closeModal()
+        () => {
+          this.modal.close();
+          this.loginForm.reset();
         },
-        error => console.log(error)
+        (error: HttpErrorResponse) => this.errors.push(error.error.message)
       );
-
-
-    this.loginForm.reset();
-    this.modal.close();
   }
 
   validateForm() {
-    Object.keys(this.loginForm.controls).forEach(e => {
-      const control = this.loginForm.controls[e];
-      if (control.invalid) {
-        this.errors = 'Invalid credentials';
-      }
-    });
+    this.errors = [];
+    if (this.loginForm.get('username').errors) {
+      this.errors.push('username');
+    }
+
+    if (this.loginForm.get('password').errors) {
+      this.errors.push('password');
+    }
   }
 
   ngOnInit() {

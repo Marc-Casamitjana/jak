@@ -63,8 +63,6 @@ export class AuthService {
   }
 
   login(username, password): any {
-    console.log(`${this.url}/login`);
-
     return this.http
       .post<any>(
         `${this.url}/login`,
@@ -74,11 +72,7 @@ export class AuthService {
         }
       )
       .pipe(
-        switchMap(user => {
-          if (!user) {
-            return throwError('Invalid credentials');
-          }
-
+        map(user => {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;

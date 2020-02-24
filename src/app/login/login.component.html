@@ -8,11 +8,17 @@
     <div class="control">
       <input type="text" formControlName="password" />
     </div>
-    <button class="btn" type="submit">Submit</button>
-    <div *ngIf="errors?.length > 0">
-      <span class="errors">
-        {{ errors }}
+    <div class="errors" *ngIf="errors?.length > 0; else errorPlaceholder">
+      <span *ngIf="errors?.length === 1; else plural">
+        Field {{ errors }} is mandatory
       </span>
+      <ng-template #plural
+        >Fields {{ errors.join(' and ') }} are mandatory</ng-template
+      >
     </div>
+    <ng-template #errorPlaceholder>
+      <div class="errorPlaceholder"></div>
+    </ng-template>
+    <button class="btn" type="submit">Submit</button>
   </div>
 </form>
