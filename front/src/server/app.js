@@ -4,7 +4,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('db.json');
+const adapter = new FileSync(`${__dirname}/db.json`);
 const db = low(adapter);
 const bodyParser = require('body-parser');
 
@@ -56,12 +56,15 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
+  
   const candidate = req.body;
-  const user = db
-    .get('users')
+  const user = db.get('users')
+    .tap(x => console.log(x)
+    )
     .find(user => candidate.username === user.username)
     .value();
-
+  console.log(user);
+  
   res.send(user);
 });
 

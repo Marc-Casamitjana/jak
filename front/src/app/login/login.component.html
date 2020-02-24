@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm.value)">
+<form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm)">
   <div class="controls-container">
     <label for="">Username</label>
     <div class="control">
@@ -9,5 +9,10 @@
       <input type="text" formControlName="password" />
     </div>
     <button class="btn" type="submit">Submit</button>
+    <div *ngIf="errors?.length > 0">
+      <span class="errors">
+        {{ errors }}
+      </span>
+    </div>
   </div>
 </form>

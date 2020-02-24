@@ -18,6 +18,7 @@ export class ModalComponent implements OnInit {
   @ViewChild(ModalDirective, { static: true }) modalHost: ModalDirective;
 
   isOpen: boolean;
+  hideModal = true;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -46,10 +47,12 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     this.modalService.openedModal.subscribe(type => {
-      this.loadComponent(type);
+    this.hideModal = false;
       if (!type) {
         this.close();
+        return;
       }
+      this.loadComponent(type);
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as jwt from 'jsonwebtoken';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
@@ -75,6 +75,11 @@ export class AuthService {
       )
       .pipe(
         map(user => {
+          if (!user) {
+            throwError('Invalid credentials, try again');
+            return;
+          }
+
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;

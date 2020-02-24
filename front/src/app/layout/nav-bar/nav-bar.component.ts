@@ -8,14 +8,12 @@ import { Router } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
   currentUser: any;
   @Output() openModalEvent: EventEmitter<string> = new EventEmitter();
 
   constructor(
-    private modal: ModalService,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) {
     this.authService.currentUser.subscribe(x => (this.currentUser = x));
   }
@@ -26,8 +24,5 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
   }
-
-  ngOnInit() {}
 }

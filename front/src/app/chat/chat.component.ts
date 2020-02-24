@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ChatService } from './chat.service';
+import { AuthService } from '../core/services/auth.service';
 
 export interface Message {
   content: string;
@@ -18,15 +19,15 @@ export class ChatComponent implements OnInit {
   chatForm: FormGroup;
   showChat: boolean;
   messagesCollection: Message[] = [];
+  currentUser;
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService, private auth: AuthService) { }
 
   newChat() {
     this.showChat = true;
     this.chatService.connect();
     this.chatService.getMessages().subscribe(e => {
       this.messagesCollection.push(e);
-      eval(e.content);
     });
   }
 
@@ -52,8 +53,6 @@ export class ChatComponent implements OnInit {
     this.chatForm = new FormGroup({
       input: new FormControl('')
     });
-
-
-    
+    this.auth.currentUser.subscribe(e => this.currentUser = e);
   }
 }

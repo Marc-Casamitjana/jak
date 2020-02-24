@@ -4,7 +4,7 @@
 		<button (click)="cleanChat()">Clean</button>
 		<div class="messages-container">
       <div *ngFor="let msg of messagesCollection" class="message">
-        <span>{{ msg.time | date : 'shortTime' }}: {{msg.name}} - {{msg.content}}</span>
+        <span>{{ msg.time | date : 'shortTime' }}: {{currentUser.username}} - {{msg.content}}</span>
       </div>
 		</div>
 		<form [formGroup]="chatForm" (ngSubmit)="addMessage()">
