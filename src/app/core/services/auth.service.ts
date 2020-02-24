@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as jwt from 'jsonwebtoken';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 export interface User {
@@ -62,11 +62,11 @@ export class AuthService {
     });
   }
 
-  login(username, password): Observable<User> {
+  login(username, password): any {
     console.log(`${this.url}/login`);
 
     return this.http
-      .post<User>(
+      .post<any>(
         `${this.url}/login`,
         { username, password },
         {
@@ -74,10 +74,9 @@ export class AuthService {
         }
       )
       .pipe(
-        map(user => {
+        switchMap(user => {
           if (!user) {
-            throwError('Invalid credentials, try again');
-            return;
+            return throwError('Invalid credentials');
           }
 
           localStorage.setItem('currentUser', JSON.stringify(user));
