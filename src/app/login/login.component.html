@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm)">
+<form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm.value)">
   <div class="controls-container">
     <label for="">Username</label>
     <div class="control">
@@ -8,17 +8,11 @@
     <div class="control">
       <input type="text" formControlName="password" />
     </div>
-    <div class="errors" *ngIf="errors?.length > 0; else errorPlaceholder">
-      <span *ngIf="errors?.length === 1; else plural">
-        Field {{ errors }} is mandatory
-      </span>
-      <ng-template #plural
-        >Fields {{ errors.join(' and ') }} are mandatory</ng-template
-      >
+    <div class="errors-container">
+      <span *ngIf="errors?.length > 0">Invalid credentials</span>
     </div>
-    <ng-template #errorPlaceholder>
-      <div class="errorPlaceholder"></div>
-    </ng-template>
-    <button class="btn" type="submit">Submit</button>
+    <button [disabled]="loginForm.invalid" class="btn" type="submit">
+      Submit
+    </button>
   </div>
 </form>

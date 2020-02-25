@@ -12,6 +12,11 @@
     <div class="control">
       <input type="text" formControlName="passwordRep" />
     </div>
-    <button class="btn" type="submit">Submit</button>
+    <div class="errors-container">
+      <span *ngIf="errors?.length > 0"> {{errors}} </span>
+    </div>
+    <button [disabled]="registerForm.invalid" class="btn" type="submit">
+      Submit
+    </button>
   </div>
 </form>

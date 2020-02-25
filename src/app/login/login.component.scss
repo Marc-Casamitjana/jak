@@ -5,38 +5,18 @@
   align-self: center;
 }
 
-input {
-  box-sizing: border-box;
-  text-decoration: none;
-  box-shadow: none;
-  border: none;
-  background-color: rgb(196, 196, 196);
-}
-
 .controls-container {
   margin: 10px 0 10px;
   font-family: 'Tomorrow', sans-serif;
   text-align: center;
 
-  & .errors {
-    color: red;
+  & .errors-container {
     height: 20px;
     font-size: 14px;
     margin-bottom: 5px;
-  }
-
-  & .errorPlaceholder {
-    height: 20px;
-    margin-bottom: 5px;
-  }
-}
-
-.control {
-  margin: 5px 0 10px;
-  & input {
-    font-family: 'Roboto', sans-serif;
-    outline: none;
-    height: 25px;
-    font-size: 22px;
+    
+    span {
+      color: red;
+    }
   }
 }

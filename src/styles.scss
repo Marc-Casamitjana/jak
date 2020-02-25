@@ -20,8 +20,24 @@ input {
   -moz-box-shadow: none;
   box-shadow: none;
   background-color: rgba(255, 255, 255, 0);
-  outline: none;
+
   padding: 20px 10px;
+}
+
+.control {
+  margin: 5px 0 30px;
+  & input {
+    box-sizing: border-box;
+    text-decoration: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid grey;
+    font-family: 'Roboto', sans-serif;
+    height: 25px;
+    font-size: 22px;
+  }
 }
 
 .btn {
@@ -47,6 +63,12 @@ input {
 
   &:focus {
     outline: none;
+  }
+
+  &:disabled {
+    background-color: rgb(192, 190, 190) !important;
+    color: #6a6a6ac7 !important;
+    cursor: not-allowed;
   }
 }
 

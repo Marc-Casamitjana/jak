@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService, User } from '../core/services/auth.service';
 import { first } from 'rxjs/operators';
 import { ModalService } from '../layout/modal/modal.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,18 +16,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private modal: ModalService) {}
 
-  get ctrls() {
-    return this.loginForm.controls;
-  }
-
-  logIn(loginForm: FormGroup) {
-    if (loginForm.invalid) {
-      this.validateForm();
-      return;
-    }
+  logIn(user: User) {
     this.errors = [];
     this.authService
-      .login(loginForm.value.username, loginForm.value.password)
+      .login(user.username, user.password)
       .pipe(first())
       .subscribe(
         () => {
@@ -36,17 +28,6 @@ export class LoginComponent implements OnInit {
         },
         (error: HttpErrorResponse) => this.errors.push(error.error.message)
       );
-  }
-
-  validateForm() {
-    this.errors = [];
-    if (this.loginForm.get('username').errors) {
-      this.errors.push('username');
-    }
-
-    if (this.loginForm.get('password').errors) {
-      this.errors.push('password');
-    }
   }
 
   ngOnInit() {

@@ -14,7 +14,7 @@ export const TOKEN_NAME = 'jwt_token';
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://localhost:3000';
+  private url = 'http://10.151.125.211:3000';
   private headers = new HttpHeaders({ 'Content-type': 'application/json' });
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
