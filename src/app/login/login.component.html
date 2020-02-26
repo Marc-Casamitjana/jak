@@ -6,11 +6,12 @@
     </div>
     <label for="">Password</label>
     <div class="control">
-      <input type="text" formControlName="password" />
+      <input type="password" formControlName="password" />
     </div>
     <div class="errors-container">
       <span *ngIf="errors?.length > 0">Invalid credentials</span>
     </div>
+
     <button [disabled]="loginForm.invalid" class="btn" type="submit">
       Submit
     </button>

@@ -12,11 +12,8 @@ export class AppComponent {
   isOpenModalLogin = false;
   isOpenModal = false;
   openedModal: string;
-  name = 'Angular';
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
     private modal: ModalService
   ) {}
 

@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { ModalComponent } from './layout/modal/modal.component';
 import { ModalDirective } from './core/directives/modal.directive';
+import { HeaderComponent } from './layout/header/header.component';
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     NavBarComponent,
     ModalComponent,
-    ModalDirective
+    ModalDirective,
+    HeaderComponent
   ],
   providers: [
     {

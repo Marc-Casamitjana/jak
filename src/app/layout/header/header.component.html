@@ -1,0 +1,39 @@
+<header>
+  <div class="logo-container">
+    <img
+      class="logo"
+      src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
+      alt=""
+    />
+  </div>
+  <div
+    class="auth-container"
+    [ngClass]="{ 'auth-container-opened': openedButtons }"
+  >
+    <img
+      src="../../../assets/icons/session.png"
+      (click)="openedButtons = !openedButtons"
+    />
+    <div *ngIf="!currentUser; else loggedIn" class="auth-buttons">
+      <div class="btn-box">
+        <button class="btn-alt btn-alt-effect" (click)="openModal('login')">
+          Log In
+        </button>
+      </div>
+      <hr>
+      <div class="btn-box">
+        <button class="btn-alt btn-alt-effect" (click)="openModal('signIn')">
+          Sign In
+        </button>
+      </div>
+    </div>
+    <ng-template #loggedIn>
+      <button (click)="logout()">
+        Log out
+      </button>
+    </ng-template>
+    <div class="user-box" *ngIf="currentUser">
+      <span>Logged as {{ currentUser.username }} </span>
+    </div>
+  </div>
+</header>

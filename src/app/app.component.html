@@ -1,5 +1,6 @@
 <main>
-  <app-navbar (openModalEvent)="openModal($event)"></app-navbar>
+  <app-header (openModalEvent)="openModal($event)"></app-header>
+  <app-navbar></app-navbar>
   <app-modal></app-modal>
   <div class="content-wrapper">
     <router-outlet></router-outlet>

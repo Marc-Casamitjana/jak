@@ -9,20 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
-  currentUser: any;
-  @Output() openModalEvent: EventEmitter<string> = new EventEmitter();
 
-  constructor(
-    private authService: AuthService
-  ) {
-    this.authService.currentUser.subscribe(x => (this.currentUser = x));
-  }
-
-  openModal(type: string): void {
-    this.openModalEvent.emit(type);
-  }
-
-  logout() {
-    this.authService.logout();
-  }
+  constructor() {}
 }

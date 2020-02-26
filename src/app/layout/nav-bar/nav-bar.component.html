@@ -1,31 +1,6 @@
 <nav class="navbar">
-  <div class="navbar-top">
-    <div class="logo-container">
-      <img
-        class="logo"
-        src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
-        alt=""
-      />
-    </div>
-  </div>
   <div class="navbar-items">
     <a routerLink="/" class="item">Home</a>
     <a routerLink="/room" class="item">Room</a>
-  </div>
-  <div *ngIf="!currentUser; else loggedIn">
-    <button (click)="openModal('login')">
-      Log In
-    </button>
-    <button (click)="openModal('signIn')">
-      Sign In
-    </button>
-  </div>
-  <ng-template #loggedIn>
-    <button (click)="logout()">
-      Log out
-    </button>
-  </ng-template>
-  <div class="user-box" *ngIf="currentUser">
-    <span>Logged as {{ currentUser.username }} </span>
   </div>
 </nav>
