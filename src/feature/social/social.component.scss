@@ -1,0 +1,46 @@
+.social {
+  height: 500px;
+  width: 300px;
+  border: 1px solid black;
+  margin: 10px 0 0 10px;
+
+  .searcher {
+    border-bottom: 1px solid black;
+    display: flex;
+    height: 60px;
+    align-items: center;
+    
+    .icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        img {
+            width: 35px;
+        }
+    }
+    
+    .animated-input {
+        position:relative;
+        input {
+            outline: none;
+        }
+        input ~ .border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            transition: .4s ease-out;
+          }
+    
+        input:focus ~ .border {
+          width: 100%;
+        }
+    
+        .border {
+            border: 1px solid black;
+        }
+
+    }
+    
+  }
+}
