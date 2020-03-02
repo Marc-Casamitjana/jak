@@ -4,18 +4,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { ChatComponent } from './chat/chat.component';
+import { ChatComponent } from './feature/chat/chat.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './feature/users/users.component';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './feature/login/login.component';
+import { RegisterComponent } from './feature/register/register.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { ModalComponent } from './layout/modal/modal.component';
 import { ModalDirective } from './core/directives/modal.directive';
 import { HeaderComponent } from './layout/header/header.component';
-import { SocialComponent } from 'src/feature/social/social.component';
+import { SocialComponent } from './feature/social/social.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,

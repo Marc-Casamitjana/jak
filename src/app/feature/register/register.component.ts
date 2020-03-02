@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService, User } from '../core/services/auth.service';
-import { ModalService } from '../layout/modal/modal.service';
+import { AuthService, User } from '../../core/services/auth.service';
+import { ModalService } from '../../layout/modal/modal.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

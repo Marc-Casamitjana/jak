@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ChatService } from './chat.service';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 export interface Message {
   content: string;

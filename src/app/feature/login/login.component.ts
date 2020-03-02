@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService, User } from '../core/services/auth.service';
+import { AuthService, User } from '../../core/services/auth.service';
 import { first } from 'rxjs/operators';
-import { ModalService } from '../layout/modal/modal.service';
+import { ModalService } from '../../layout/modal/modal.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
