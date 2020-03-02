@@ -15,15 +15,20 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { ModalComponent } from './layout/modal/modal.component';
 import { ModalDirective } from './core/directives/modal.directive';
 import { HeaderComponent } from './layout/header/header.component';
+import { SocialComponent } from './feature/social/social.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
+  { path: 'privates/:user', component: UsersComponent },
+  { path: 'social', component: SocialComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
@@ -38,7 +43,8 @@ const appRoutes: Routes = [
     NavBarComponent,
     ModalComponent,
     ModalDirective,
-    HeaderComponent
+    HeaderComponent,
+    SocialComponent
   ],
   providers: [
     {

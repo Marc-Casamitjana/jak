@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ChatService } from './chat.service';
 import { AuthService, User } from '../../core/services/auth.service';
-import { flatMap } from 'rxjs/operators';
 import { concat } from 'rxjs';
 
 export interface Message {
