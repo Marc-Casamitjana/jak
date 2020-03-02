@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
-
+  subsectionOpened = false;
   constructor() {}
+
+  openSubsection() {
+    this.subsectionOpened = !this.subsectionOpened;
+  }
 }

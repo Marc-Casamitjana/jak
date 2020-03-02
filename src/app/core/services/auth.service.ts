@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as jwt from 'jsonwebtoken';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { tap, map, switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 export interface User {
   username: string;
@@ -14,7 +15,7 @@ export const TOKEN_NAME = 'jwt_token';
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'https://jak-server.herokuapp.com';
+  private url: string = environment.API_URL;
   private headers = new HttpHeaders({ 'Content-type': 'application/json' });
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
@@ -63,6 +64,8 @@ export class AuthService {
   }
 
   login(username, password): any {
+    console.log(environment.API_URL);
+
     return this.http
       .post<any>(
         `${this.url}/login`,

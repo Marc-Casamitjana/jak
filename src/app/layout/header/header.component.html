@@ -8,32 +8,39 @@
   </div>
   <div
     class="auth-container"
-    [ngClass]="{ 'auth-container-opened': openedButtons }"
+    [ngClass]="{
+      'auth-container-opened': openedButtons
+    }"
   >
     <img
       src="../../../assets/icons/session.png"
       (click)="openedButtons = !openedButtons"
     />
-    <div *ngIf="!currentUser; else loggedIn" class="auth-buttons">
-      <div class="btn-box">
-        <button class="btn-alt btn-alt-effect" (click)="openModal('login')">
-          Log In
-        </button>
+    <div class="auth-buttons">
+      <div *ngIf="!currentUser; else loggedIn">
+        <div>
+          <button class="btn-alt btn-alt-effect" (click)="openModal('login')">
+            Log In
+          </button>
+        </div>
+        <hr />
+        <div>
+          <button class="btn-alt btn-alt-effect" (click)="openModal('signIn')">
+            Sign In
+          </button>
+        </div>
       </div>
-      <hr>
-      <div class="btn-box">
-        <button class="btn-alt btn-alt-effect" (click)="openModal('signIn')">
-          Sign In
+      <ng-template #loggedIn>
+        <button class="btn-alt btn-alt-effect" disabled>
+          Profile
         </button>
-      </div>
+        <button class="btn-alt btn-alt-effect" (click)="logout()">
+          Log Out
+        </button>
+      </ng-template>
     </div>
-    <ng-template #loggedIn>
-      <button (click)="logout()">
-        Log out
-      </button>
-    </ng-template>
     <div class="user-box" *ngIf="currentUser">
-      <span>Logged as {{ currentUser.username }} </span>
+      <span>Logged as {{ currentUser?.username }} </span>
     </div>
   </div>
 </header>

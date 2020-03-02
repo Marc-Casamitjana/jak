@@ -4,8 +4,8 @@ import {
   ComponentFactoryResolver,
   ViewChild
 } from '@angular/core';
-import { LoginComponent } from 'src/app/login/login.component';
-import { RegisterComponent } from 'src/app/register/register.component';
+import { LoginComponent } from 'src/app/feature/login/login.component';
+import { RegisterComponent } from 'src/app/feature/register/register.component';
 import { ModalDirective } from 'src/app/core/directives/modal.directive';
 import { ModalService } from './modal.service';
 
@@ -47,7 +47,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     this.modalService.openedModal.subscribe(type => {
-    this.hideModal = false;
+      this.hideModal = false;
       if (!type) {
         this.close();
         return;

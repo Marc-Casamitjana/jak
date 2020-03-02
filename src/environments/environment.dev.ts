@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
+  name: 'dev',
   API_URL: 'https://jak-server.herokuapp.com'
 };

@@ -29,7 +29,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start:dev": "ng serve --configuration=dev "
   },
   "devDependencies": {
     "@angular/language-service": "~7.0.0",

@@ -8,30 +8,31 @@ import { Message } from './chat.component';
   providedIn: 'root'
 })
 export class ChatService {
-
-  private url = 'http://localhost:3000';
+  private url = environment.API_URL;
   private socket;
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   connect() {
-    this.socket = io(this.url);
-    // return this.http.get('http://localhost:3000/connect', { responseType: 'text' })
+    if (!this.socket) {
+      this.socket = io(this.url);
+    }
   }
 
   sendMessage(msg, id?) {
     this.socket.emit('add-message', msg);
-    // id =hola  'haha';
     if (id) {
       this.socket.emit('say to someone', msg, this.socket.id);
     }
   }
 
+  getChatHistory(): Observable<Message[]> {
+    return this.http.get<Message[]>(`${this.url}/chatHistory`);
+  }
+
   getMessages() {
-    return new Observable<Message>((observer) => {
-      this.socket.on('new-message', (msg) => {
+    return new Observable<Message>(observer => {
+      this.socket.on('new-message', msg => {
         observer.next(msg);
       });
     });
