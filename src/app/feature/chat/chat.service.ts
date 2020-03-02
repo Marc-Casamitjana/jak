@@ -27,7 +27,7 @@ export class ChatService {
   }
 
   getChatHistory(): Observable<Message[]> {
-    return this.http.get<Message[]>(`${this.url}/chatHistory`);
+    return this.http.get<Message[]>(`${this.url}/chat-history`);
   }
 
   getMessages() {

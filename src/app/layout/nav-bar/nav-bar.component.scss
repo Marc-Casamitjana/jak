@@ -63,8 +63,7 @@
   &-items-subsection {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease-out;
-    height: 25px;
+    transition: max-height 0.6s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,7 +72,7 @@
   }
 
   &-items-subsection-opened {
-    max-height: 100px;
+    max-height: 500px;
   }
 }
 

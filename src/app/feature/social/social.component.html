@@ -2,17 +2,31 @@
   <div class="social-contacts">
     <div class="searcher">
       <div class="icon">
-        <img src="../../assets/icons/lup.png" alt="" />
+        <img
+          [ngClass]="{ foo: blur }"
+          src="../../assets/icons/lup.png"
+          alt=""
+        />
       </div>
+
       <div class="animated-input">
-        <input (focusout)="blur = !blur" type="text" name="" id="" />
-        <span [ngClass]="{inputt: 'blur'}" class="border"></span>
+        <input (focus)="focusInput()" type="text" />
+
+        <span class="border"></span>
       </div>
     </div>
+
     <div class="list">
       <div class="contact">
         <span></span>
       </div>
+    </div>
+    <div class="new-friends-box" [ngClass]="{ opened: isFriendsBoxShown }">
+      <img
+        src="../../assets/icons/black_cross.png"
+        alt=""
+        (click)="showAddFriendsBox()"
+      />
     </div>
   </div>
 </div>

@@ -7,10 +7,10 @@
       [ngClass]="{ 'navbar-items-subsection-opened': subsectionOpened }"
     >
       <a routerLink="/room" class="subitem">General</a>
-      <a routerLink="/privates/{{ currentUser?.username }}" class="item"
+      <a routerLink="/privates/{{ currentUser?.username }}" class="subitem"
         >Privates</a
       >
-      <a routerLink="/social" class="item">Social</a>
+      <a routerLink="/social" class="subitem">Social</a>
     </div>
   </div>
 </nav>
