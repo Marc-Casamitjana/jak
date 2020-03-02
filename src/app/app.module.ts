@@ -15,9 +15,12 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { ModalComponent } from './layout/modal/modal.component';
 import { ModalDirective } from './core/directives/modal.directive';
 import { HeaderComponent } from './layout/header/header.component';
+import { SocialComponent } from 'src/feature/social/social.component';
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
+  { path: 'privates/:user', component: UsersComponent },
+  { path: 'social', component: SocialComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
@@ -38,7 +41,8 @@ const appRoutes: Routes = [
     NavBarComponent,
     ModalComponent,
     ModalDirective,
-    HeaderComponent
+    HeaderComponent,
+    SocialComponent
   ],
   providers: [
     {
