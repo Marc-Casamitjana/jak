@@ -15,7 +15,6 @@
 
     .item {
       padding: 5px;
-      text-align: right;
       font-family: 'Tomorrow', sans-serif;
       font-weight: bold;
       cursor: pointer;
@@ -23,6 +22,9 @@
       span {
         z-index: 20;
       }
+    }
+
+    .subitem {
     }
   }
 }
@@ -43,7 +45,6 @@
 
     .item {
       padding: 5px;
-      text-align: right;
       font-family: 'Tomorrow', sans-serif;
       font-weight: bold;
       cursor: pointer;
@@ -52,6 +53,26 @@
         z-index: 20;
       }
     }
+
+    .subitem {
+      font-family: 'Tomorrow', sans-serif;
+      font-size: 15px;
+    }
+  }
+
+  &-items-subsection {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #7e81a585;
+  }
+
+  &-items-subsection-opened {
+    max-height: 500px;
   }
 }
 

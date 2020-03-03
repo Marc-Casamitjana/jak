@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialComponent implements OnInit {
   blur = false;
-  constructor() { }
+  isFriendsBoxShown: boolean;
+  constructor() {}
 
-  ngOnInit() {
+  showAddFriendsBox() {
+    this.isFriendsBoxShown = !this.isFriendsBoxShown;
   }
 
+  ngOnInit() {}
 }

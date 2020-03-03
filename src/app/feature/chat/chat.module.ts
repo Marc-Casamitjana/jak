@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [ChatComponent]
 })
-export class ChatModule { }
+export class ChatModule {}

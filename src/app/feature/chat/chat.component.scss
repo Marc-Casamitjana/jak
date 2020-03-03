@@ -1,6 +1,6 @@
 .chat {
   padding: 20px 0 0 20px;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 
   &-window {
     .messages-container {
@@ -11,6 +11,15 @@
       border: 3px solid rgba(73, 73, 124, 0.534);
     }
     padding: 15px 0 15px;
+  }
+
+  & .input-box {
+    background-color: sandybrown;
+    width: 60vw;
+
+    input {
+      font-size: 20px;
+    }
   }
 }
 

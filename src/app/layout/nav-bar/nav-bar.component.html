@@ -1,8 +1,16 @@
 <nav class="navbar">
   <div class="navbar-items">
     <a routerLink="/" class="item">Home</a>
-    <a routerLink="/room" class="item">Room</a>
-    <a routerLink="/privates/{{currentUser?.username}}" class="item">Privates</a>
-    <a routerLink="/social" class="item">Social</a>
+    <span class="item" (click)="openSubsection()">Rooms</span>
+    <div
+      class="navbar-items-subsection"
+      [ngClass]="{ 'navbar-items-subsection-opened': subsectionOpened }"
+    >
+      <a routerLink="/room" class="subitem">General</a>
+      <a routerLink="/privates/{{ currentUser?.username }}" class="subitem"
+        >Privates</a
+      >
+      <a routerLink="/social" class="subitem">Social</a>
+    </div>
   </div>
 </nav>
