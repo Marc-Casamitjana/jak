@@ -14,5 +14,9 @@ export class SocialComponent implements OnInit {
     this.isFriendsBoxShown = !this.isFriendsBoxShown;
   }
 
+  addNewFriend() {
+    
+  }
+
   ngOnInit() {}
 }
