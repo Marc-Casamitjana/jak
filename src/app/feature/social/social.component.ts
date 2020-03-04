@@ -10,7 +10,7 @@ import { User } from 'src/app/core/services/auth.service';
 export class SocialComponent implements OnInit {
   blur = false;
   isFriendsBoxShown: boolean;
-  searchedFriend: string;
+  friendName: string;
 
   constructor(private socialService: SocialService) {}
 
@@ -18,10 +18,10 @@ export class SocialComponent implements OnInit {
     this.isFriendsBoxShown = !this.isFriendsBoxShown;
   }
 
-  addNewFriend(name) {
-    let friend: User;
-    this.socialService.getFriend(name).subscribe(user => (friend = user));
-    console.log(friend);
+  addNewFriend(name: string) {
+    let friendName: string;
+    this.socialService.getFriend(name).subscribe((username: string) => (friendName = username));
+    this.friendName = friendName;
   }
 
   ngOnInit() {}
