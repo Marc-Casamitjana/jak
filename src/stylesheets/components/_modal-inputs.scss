@@ -1,0 +1,10 @@
+.control {
+  margin: 5px 0 30px;
+  & input {
+    border-bottom: 1px solid grey;
+    font-family: 'Roboto', sans-serif;
+    height: 25px;
+    font-size: 22px;
+    padding: 20px 10px;
+  }
+}

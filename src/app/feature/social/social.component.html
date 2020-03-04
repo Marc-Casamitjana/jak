@@ -23,15 +23,33 @@
     </div>
     <div class="new-friends-box" [ngClass]="{ opened: isFriendsBoxShown }">
       <img
-        src="../../assets/icons/black_cross.png"
+        class="arrow"
+        src="../../assets/icons/hat-arrow-right.png"
         alt=""
         (click)="showAddFriendsBox()"
       />
-      <img
-        src="../../assets/icons/plus.png"
-        alt=""
-        (click)="addNewFriend()"
-      />
+      <div
+        [ngClass]="{ opened: isFriendsBoxShown }"
+        class="friend-aggregator opened"
+      >
+        <div class="friend-searcher">
+          <label for="">Add a friend</label>
+          <input
+            type="text"
+            placeholder="Type a name"
+            (keydown.enter)="addNewFriend($event.target.value)"
+            [(ngModel)]="searchedFriend"
+          />
+        </div>
+        <div>
+          <img
+            class=""
+            src="../../assets/icons/plus.png"
+            alt=""
+            (click)="addNewFriend()"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>

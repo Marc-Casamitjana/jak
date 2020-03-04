@@ -1,86 +1,121 @@
+@import '../../../stylesheets/abstracts/mixins';
+
 .social {
   margin: 10px 0 0 10px;
+}
 
-  &-contacts {
-    height: 500px;
-    width: 300px;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.social-contacts {
+  height: 500px;
+  width: 300px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
-    .searcher {
-      border-bottom: 1px solid black;
-      align-items: center;
-      min-height: 45px;
-      padding: 7px 0;
-      position: relative;
+  .searcher {
+    border-bottom: 1px solid black;
+    align-items: center;
+    min-height: 60px;
+    padding: 7px 0;
+    position: relative;
 
-      .icon {
-        margin-left: 20px;
-        position: absolute;
-        top: 12px;
-        transition: 0.2s ease;
-          width: 30px;
-
-        img {
-          width: 100%;
-        }
-      }
-
-      &:focus-within .icon {
-        transition: 0.2s cubic-bezier(0, 1.76, 0.99, 1.87);
-        transform: scale(1.2,1.2)
-      }
-
-      .animated-input {
-        position: absolute;
-        left: 45px;
-        margin-left: 20px;
-        overflow: hidden;
-
-        input {
-          height: 45px;
-          font-size: 20px;
-          outline: none;
-          border-bottom: 1px solid black;
-          width: 90%;
-        }
-
-        input ~ .border {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          transition: 0.15s ease-out;
-        }
-
-        input:focus ~ .border {
-          width: 90%;
-        }
-
-        .border {
-          border: 1px solid black;
-        }
-      }
-    }
-    & .list {
-      height: 100%;
-      transition: 1s ease-in;
-      border-bottom: 1px solid black;
-    }
-
-    & .new-friends-box {
-      height: 20px;
-      transition: 0.3s ease;
+    .icon {
+      margin-left: 20px;
+      position: absolute;
+      top: 12px;
+      transition: 0.2s ease;
+      width: 30px;
 
       img {
-        width: 20px;
+        width: 100%;
+      }
+    }
+
+    &:focus-within .icon {
+      transition: 0.2s cubic-bezier(0, 1.76, 0.99, 1.87);
+      transform: scale(1.2, 1.2);
+    }
+
+    .animated-input {
+      position: absolute;
+      left: 45px;
+      margin-left: 20px;
+      overflow: hidden;
+
+      input {
+        height: 45px;
+        font-size: 20px;
+        outline: none;
+        border-bottom: 1px solid black;
+        width: 90%;
       }
 
+      input ~ .border {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        transition: 0.15s ease-out;
+      }
+
+      input:focus ~ .border {
+        width: 90%;
+      }
+
+      .border {
+        border: 1px solid black;
+      }
+    }
+  }
+  & .list {
+    height: 100%;
+    transition: 1s ease-in;
+    border-bottom: 1px solid black;
+  }
+
+  & .new-friends-box {
+    height: 20px;
+    transition: 0.1s ease;
+    position: relative;
+
+    img {
+      width: 20px;
+    }
+
+    &.opened {
+      transition: 0.3s cubic-bezier(0.82, 0.38, 0.49, 1.85);
+      height: 70px;
+
+      & .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    & .arrow {
+      width: 12px;
+      position: absolute;
+      top: 3px;
+      left: 5px;
+      transform: rotate(-90deg);
+      transition: 0.2s ease;
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    & .friend-aggregator {
+      transition: 0.1s ease;
+      display: flex;
+      justify-content: flex-end;
+      opacity: 0;
+
       &.opened {
-        transition: 0.3s cubic-bezier(0.39, -0.72, 0.49, 2.45);
-        height: 70px;
+        transition: 0.7s ease;
+        opacity: 1;
+      }
+
+      & .friend-searcher {
+        display: flex;
+        flex-direction: column;
       }
     }
   }
