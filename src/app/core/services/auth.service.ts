@@ -64,8 +64,6 @@ export class AuthService {
   }
 
   login(username, password): any {
-    console.log(environment.API_URL);
-
     return this.http
       .post<any>(
         `${this.url}/login`,

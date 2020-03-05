@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UsersData } from './social.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SocialService {
 
   constructor(private http: HttpClient) {}
 
-  getFriend(name): Observable<string> {
-    return this.http.get<string>(`${this.url}/user/${name}`);
+  getFriend(usersData: UsersData): Observable<string> {
+    return this.http.post<string>(`${this.url}/user/`, usersData);
   }
 }
