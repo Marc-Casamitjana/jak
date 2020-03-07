@@ -40,6 +40,7 @@
             (keydown.enter)="addNewFriend($event.target.value)"
             [(ngModel)]="friendName"
           />
+          <span class="error-text">{{ newFriendMsg }}</span>
         </div>
         <div>
           <img

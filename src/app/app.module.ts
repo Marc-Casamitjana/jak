@@ -16,6 +16,7 @@ import { ModalComponent } from './layout/modal/modal.component';
 import { ModalDirective } from './core/directives/modal.directive';
 import { HeaderComponent } from './layout/header/header.component';
 import { SocialComponent } from './feature/social/social.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
