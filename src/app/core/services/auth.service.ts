@@ -8,8 +8,15 @@ import { environment } from '../../../environments/environment';
 export interface User {
   username: string;
   password: string;
+  id: number;
+  friends?: [];
 }
 export const TOKEN_NAME = 'jwt_token';
+
+export interface HttpResponse {
+  status: number;
+  data: any;
+}
 
 @Injectable({
   providedIn: 'root'

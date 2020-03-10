@@ -51,6 +51,24 @@
           />
         </div>
       </div>
+      <div
+        class="friend-requests-box"
+        [ngClass]="{ opened: isFriendsBoxShown }"
+        *ngIf="friendRequests.length > 0; else noRequests"
+      >
+        <div *ngFor="let request of friendRequests" class="request">
+          {{request.content}}
+        </div>
+        <div class="buttons">
+          <span>X</span>
+          <span>L</span>
+        </div>
+      </div>
+      <ng-template #noRequests>
+        <div class="friend-requests-box" [ngClass]="{ opened: isFriendsBoxShown }">
+          You have no pending requests.
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

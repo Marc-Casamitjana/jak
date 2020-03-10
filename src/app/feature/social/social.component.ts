@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialService } from './social.service';
-import { User } from 'src/app/core/services/auth.service';
+import { User, HttpResponse } from 'src/app/core/services/auth.service';
 import { AuthService } from '../../core/services/auth.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
+import { flatMap, tap } from 'rxjs/operators';
+import { UsersService, Notification } from '../users/users.service';
 
 export interface UsersData {
   currentUsername: string;
@@ -32,10 +34,12 @@ export class SocialComponent implements OnInit {
   isFriendsBoxShown: boolean;
   newFriendMsg: string;
   currentUser: User;
+  friendRequests: Notification[] = [];
 
   constructor(
     private socialService: SocialService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UsersService
   ) {}
 
   showAddFriendsBox() {
@@ -47,15 +51,38 @@ export class SocialComponent implements OnInit {
       currentUsername: this.currentUser.username,
       friendName: name
     };
-    this.socialService.getFriend(usersData).subscribe(
-      (username: string) => (this.newFriendMsg = username),
-      (err: HttpErrorResponse) => (this.newFriendMsg = err.error)
-    );
+    this.socialService
+      .getFriend(usersData)
+      .pipe(
+        tap((friend) => {
+          console.log(friend);
+        }
+        )
+      )
+      .subscribe(
+        () => {},
+        (err: HttpErrorResponse) => (this.newFriendMsg = err.error)
+      );
+  }
+
+  classify(notifications: Notification[]) {
+    notifications.forEach((notification: Notification) => {
+      this[notification.type].push(notification);
+    });
   }
 
   ngOnInit() {
-    this.authService.currentUser.subscribe(
-      (user: User) => (this.currentUser = user)
-    );
+    this.authService.currentUser
+      .pipe(
+        flatMap((user: User) => {
+          this.currentUser = user;
+          return this.userService.getNotifications(this.currentUser);
+        })
+      )
+      .subscribe((notifications: HttpResponse) => {
+        if (notifications.data) {
+          this.classify(notifications.data);
+        }
+      });
   }
 }

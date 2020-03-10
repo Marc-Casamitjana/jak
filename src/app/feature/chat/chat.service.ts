@@ -30,7 +30,7 @@ export class ChatService {
     return this.http.get<Message[]>(`${this.url}/chat-history`);
   }
 
-  getMessages() {
+  getMessages(): Observable<Message> {
     return new Observable<Message>(observer => {
       this.socket.on('new-message', msg => {
         observer.next(msg);
