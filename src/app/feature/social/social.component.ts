@@ -4,7 +4,7 @@ import { User, HttpResponse } from 'src/app/core/services/auth.service';
 import { AuthService } from '../../core/services/auth.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
-import { flatMap, tap } from 'rxjs/operators';
+import { flatMap, tap, switchMap } from 'rxjs/operators';
 import { UsersService, Notification } from '../users/users.service';
 
 export interface UsersData {
@@ -19,12 +19,15 @@ export interface UsersData {
   animations: [
     trigger('inOutAnimation', [
       transition(':enter', [
-        style({ height: 0, opacity: 0 }),
-        animate('1s ease-out', style({ height: 150, opacity: 1 }))
+        style({ opacity: 0, transform: 'translateY(-100px)' }),
+        animate(
+          '0.3s ease-in',
+          style({ opacity: 1, transform: 'translateY(0%)' })
+        )
       ]),
       transition(':leave', [
-        style({ height: 150, opacity: 1 }),
-        animate('1s ease-in', style({ height: 0, opacity: 0 }))
+        style({ opacity: 1 }),
+        animate('1s ease-in', style({ opacity: 0 }))
       ])
     ])
   ]
@@ -33,8 +36,9 @@ export class SocialComponent implements OnInit {
   blur = false;
   isFriendsBoxShown: boolean;
   newFriendMsg: string;
+  newFriendError: string;
   currentUser: User;
-  friendRequests: Notification[] = [];
+  friendRequest: Notification[] = [];
 
   constructor(
     private socialService: SocialService,
@@ -47,6 +51,9 @@ export class SocialComponent implements OnInit {
   }
 
   addNewFriend(name: string) {
+    this.newFriendMsg = undefined;
+    this.newFriendError = undefined;
+
     const usersData: UsersData = {
       currentUsername: this.currentUser.username,
       friendName: name
@@ -54,21 +61,33 @@ export class SocialComponent implements OnInit {
     this.socialService
       .getFriend(usersData)
       .pipe(
-        tap((friend) => {
-          console.log(friend);
-        }
-        )
+        switchMap((response: HttpResponse) => {
+          const payload = {
+            requestedUser: response.data,
+            user: this.currentUser
+          };
+          return this.socialService.sendFriendRequest(payload);
+        })
       )
       .subscribe(
-        () => {},
-        (err: HttpErrorResponse) => (this.newFriendMsg = err.error)
+        (msg: HttpResponse) => (this.newFriendMsg = msg.data),
+        (err: HttpErrorResponse) => (this.newFriendError = err.error.data)
       );
+    this.clearMessagesAfterDelay();
   }
 
   classify(notifications: Notification[]) {
+    console.log(notifications);
     notifications.forEach((notification: Notification) => {
       this[notification.type].push(notification);
     });
+  }
+
+  clearMessagesAfterDelay() {
+    setTimeout(() => {
+      this.newFriendError = undefined;
+      this.newFriendMsg = undefined;
+    }, 3000);
   }
 
   ngOnInit() {

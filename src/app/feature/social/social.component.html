@@ -40,7 +40,15 @@
             (keydown.enter)="addNewFriend($event.target.value)"
             [(ngModel)]="friendName"
           />
-          <span class="error-text">{{ newFriendMsg }}</span>
+          <span class="border"></span>
+          <div class="messages-box">
+            <span *ngIf="newFriendMsg" [@inOutAnimation] class="success-text">{{
+              newFriendMsg
+            }}</span>
+            <span *ngIf="newFriendError" [@inOutAnimation] class="error-text">
+              {{ newFriendError }}
+            </span>
+          </div>
         </div>
         <div>
           <img
@@ -54,18 +62,21 @@
       <div
         class="friend-requests-box"
         [ngClass]="{ opened: isFriendsBoxShown }"
-        *ngIf="friendRequests.length > 0; else noRequests"
+        *ngIf="friendRequest.length > 0; else noRequests"
       >
-        <div *ngFor="let request of friendRequests" class="request">
-          {{request.content}}
-        </div>
-        <div class="buttons">
-          <span>X</span>
-          <span>L</span>
+        <div *ngFor="let request of friendRequest" class="request">
+          {{ request.content }}
+          <div class="buttons">
+            <span>X</span>
+            <span>L</span>
+          </div>
         </div>
       </div>
       <ng-template #noRequests>
-        <div class="friend-requests-box" [ngClass]="{ opened: isFriendsBoxShown }">
+        <div
+          class="friend-requests-box empty"
+          [ngClass]="{ opened: isFriendsBoxShown }"
+        >
           You have no pending requests.
         </div>
       </ng-template>
