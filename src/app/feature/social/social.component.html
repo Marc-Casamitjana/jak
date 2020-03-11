@@ -67,8 +67,8 @@
         <div *ngFor="let request of friendRequest" class="request">
           {{ request.content }}
           <div class="buttons">
-            <span>X</span>
-            <span>L</span>
+            <span (click)="resolveRequest(request.content, true)">X</span>
+            <span (click)="resolveRequest(request.content, false)">L</span>
           </div>
         </div>
       </div>

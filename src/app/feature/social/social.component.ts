@@ -90,6 +90,10 @@ export class SocialComponent implements OnInit {
     }, 3000);
   }
 
+  resolveRequest(username: string, isAccepted: boolean) {
+    this.socialService.resolveFriendRequest(username, isAccepted).subscribe();
+  }
+
   ngOnInit() {
     this.authService.currentUser
       .pipe(

@@ -22,6 +22,17 @@ export class SocialService {
   }
 
   sendFriendRequest(payload: Payload): Observable<HttpResponse> {
+    return this.http.post<HttpResponse>(
+      `${this.url}/friend-request-notification`,
+      payload
+    );
+  }
+
+  resolveFriendRequest(
+    username: string,
+    isAccepted: boolean
+  ): Observable<HttpResponse> {
+    const payload = { username, isAccepted };
     return this.http.post<HttpResponse>(`${this.url}/friend-request`, payload);
   }
 }
