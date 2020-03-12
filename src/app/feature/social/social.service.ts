@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UsersData } from './social.component';
-import { User, HttpResponse } from 'src/app/core/services/auth.service';
+import {
+  User,
+  HttpResponse,
+  AuthService
+} from 'src/app/core/services/auth.service';
 interface Payload {
   requestedUser: User;
   user: User;
@@ -29,10 +33,14 @@ export class SocialService {
   }
 
   resolveFriendRequest(
-    username: string,
-    isAccepted: boolean
+    friendName: string,
+    isAccepted: boolean,
+    username: string
   ): Observable<HttpResponse> {
-    const payload = { username, isAccepted };
-    return this.http.post<HttpResponse>(`${this.url}/friend-request`, payload);
+    const payload = { friendName, username, isAccepted };
+    return this.http.post<HttpResponse>(
+      `${this.url}/resolve-friend-request`,
+      payload
+    );
   }
 }

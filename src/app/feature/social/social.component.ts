@@ -6,6 +6,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { flatMap, tap, switchMap } from 'rxjs/operators';
 import { UsersService, Notification } from '../users/users.service';
+import { concat } from 'rxjs';
 
 export interface UsersData {
   currentUsername: string;
@@ -77,7 +78,6 @@ export class SocialComponent implements OnInit {
   }
 
   classify(notifications: Notification[]) {
-    console.log(notifications);
     notifications.forEach((notification: Notification) => {
       this[notification.type].push(notification);
     });
@@ -91,7 +91,21 @@ export class SocialComponent implements OnInit {
   }
 
   resolveRequest(username: string, isAccepted: boolean) {
-    this.socialService.resolveFriendRequest(username, isAccepted).subscribe();
+    concat(
+      this.socialService.resolveFriendRequest(
+        username,
+        isAccepted,
+        this.currentUser.username
+      ),
+      this.userService.getNotifications(this.currentUser)
+    ).subscribe(e => {
+      if (Array.isArray(e.data) && e.data) {
+        console.log(e.data);
+
+        this.friendRequest = [];
+        this.classify(e.data);
+      }
+    });
   }
 
   ngOnInit() {
