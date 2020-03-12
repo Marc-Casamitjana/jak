@@ -108,18 +108,19 @@ export class SocialComponent implements OnInit {
     });
   }
 
+  openPrivate() {
+    const requestedUser = 'rooter';
+  }
+
   ngOnInit() {
-    this.authService.currentUser
-      .pipe(
-        flatMap((user: User) => {
-          this.currentUser = user;
-          return this.userService.getNotifications(this.currentUser);
-        })
-      )
+    this.currentUser = this.authService.currentUserValue;
+    this.userService
+      .getNotifications(this.currentUser)
       .subscribe((notifications: HttpResponse) => {
         if (notifications.data) {
           this.classify(notifications.data);
         }
       });
+    console.log(this.authService.currentUserValue);
   }
 }

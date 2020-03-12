@@ -11,9 +11,7 @@ export class NavBarComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.currentUser.subscribe(
-      (user: User) => (this.currentUser = user)
-    );
+    this.currentUser = this.authService.currentUserValue;
   }
   openSubsection() {
     this.subsectionOpened = !this.subsectionOpened;

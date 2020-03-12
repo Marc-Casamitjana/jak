@@ -17,10 +17,11 @@ import { ModalDirective } from './core/directives/modal.directive';
 import { HeaderComponent } from './layout/header/header.component';
 import { SocialComponent } from './feature/social/social.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PrivatesComponent } from './feature/privates/privates.component';
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
-  { path: 'privates/:user', component: UsersComponent },
+  { path: 'privates', component: PrivatesComponent },
   { path: 'social', component: SocialComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     ModalComponent,
     ModalDirective,
     HeaderComponent,
-    SocialComponent
+    SocialComponent,
+    PrivatesComponent
   ],
   providers: [
     {

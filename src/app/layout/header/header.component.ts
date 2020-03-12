@@ -10,9 +10,7 @@ export class HeaderComponent implements OnInit {
   @Output() openModalEvent: EventEmitter<string> = new EventEmitter();
   currentUser: User;
   openedButtons = false;
-  constructor(private authService: AuthService) { 
-    this.authService.currentUser.subscribe(x => (this.currentUser = x));
-  }
+  constructor(private authService: AuthService) {}
 
   openModal(type: string): void {
     this.openModalEvent.emit(type);
@@ -23,7 +21,6 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
   ngOnInit() {
-    
+    this.currentUser = this.authService.currentUserValue;
   }
-
 }

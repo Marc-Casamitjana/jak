@@ -67,13 +67,23 @@
       }
     }
   }
-  & .list {
+  .list {
     height: 100%;
     transition: 1s ease-in;
     border-bottom: 1px solid black;
+
+    & .contact {
+      margin: 10px 5px 10px;
+      padding: 10px 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid black;
+      border-right: 1px solid black;
+  box-shadow: -2px 2px 0px 0px rgba(0, 0, 0, 0.75)
+    }
   }
 
-  & .new-friends-box {
+  .new-friends-box {
     height: 20px;
     transition: 0.1s ease;
     position: relative;
@@ -168,4 +178,5 @@
       }
     }
   }
+
 }
