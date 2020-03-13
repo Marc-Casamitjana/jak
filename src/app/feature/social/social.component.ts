@@ -113,7 +113,7 @@ export class SocialComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentUser = this.authService.currentUserValue;
+    this.authService.currentUser.subscribe(e => this.currentUser = e)
     this.userService
       .getNotifications(this.currentUser)
       .subscribe((notifications: HttpResponse) => {
