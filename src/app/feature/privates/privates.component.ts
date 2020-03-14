@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { PrivatesService } from './privates.service';
 
 @Component({
   selector: 'app-privates',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privates.component.scss']
 })
 export class PrivatesComponent implements OnInit {
+  constructor(private privateService: PrivatesService) { }
 
-  constructor() { }
-
-  ngOnInit() {
+  setListener(listener) {
+    this.privateService.connect();
   }
 
+  ngOnInit() {
+
+  }
+
+  
 }
