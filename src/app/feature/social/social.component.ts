@@ -40,6 +40,7 @@ export class SocialComponent implements OnInit {
   newFriendError: string;
   currentUser: User;
   friendRequest: Notification[] = [];
+  friends: any[];
 
   constructor(
     private socialService: SocialService,
@@ -114,13 +115,15 @@ export class SocialComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue;
-    this.userService
-      .getNotifications(this.currentUser)
-      .subscribe((notifications: HttpResponse) => {
-        if (notifications.data) {
-          this.classify(notifications.data);
-        }
-      });
-    console.log(this.authService.currentUserValue);
+    concat(
+      this.userService.getNotifications(this.currentUser),
+      this.userService.getFriends()
+    ).subscribe(response => {
+      if (response.data.length > 0 && response.data[0].hasOwnProperty('type')) {
+        this.classify(response.data);
+        return;
+      }
+      this.friends = response.data;
+    });
   }
 }

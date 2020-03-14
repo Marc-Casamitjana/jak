@@ -17,8 +17,8 @@
     </div>
 
     <div class="list">
-      <div class="contact">
-        <span>Friend</span>
+      <div *ngFor="let friend of friends" class="contact">
+        <span>{{ friend.name }}</span>
         <a href="" (click)="openPrivate()">Send private</a>
       </div>
     </div>

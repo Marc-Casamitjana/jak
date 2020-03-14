@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AuthService, User, HttpResponse } from 'src/app/core/services/auth.service';
-import { Observable } from 'rxjs';
+import {
+  AuthService,
+  User,
+  HttpResponse
+} from 'src/app/core/services/auth.service';
+import { Observable, of } from 'rxjs';
 
 export interface Notification {
-  message: string;
+  content: string;
   type: string;
 }
 
@@ -13,10 +17,20 @@ export interface Notification {
   providedIn: 'root'
 })
 export class UsersService {
-
-  constructor(private http: HttpClient) { }
+  currentUser: User;
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.currentUser = this.auth.currentUserValue;
+  }
 
   getNotifications(user: User): Observable<HttpResponse> {
-    return this.http.get<HttpResponse>(`${environment.API_URL}/notifications/${user.id}`);
+    return this.http.get<HttpResponse>(
+      `${environment.API_URL}/notifications/${user.id}`
+    );
+  }
+
+  getFriends(): Observable<HttpResponse> {
+    return this.http.get<HttpResponse>(
+      `${environment.API_URL}/friends/${this.currentUser.id}`
+    );
   }
 }
