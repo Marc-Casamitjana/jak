@@ -4,9 +4,9 @@ import { User, HttpResponse } from 'src/app/core/services/auth.service';
 import { AuthService } from '../../core/services/auth.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
-import { flatMap, tap, switchMap } from 'rxjs/operators';
+import { flatMap, tap, switchMap, map } from 'rxjs/operators';
 import { UsersService, Notification } from '../users/users.service';
-import { concat } from 'rxjs';
+import { concat, forkJoin } from 'rxjs';
 
 export interface UsersData {
   currentUsername: string;
@@ -92,20 +92,24 @@ export class SocialComponent implements OnInit {
   }
 
   resolveRequest(username: string, isAccepted: boolean) {
-    concat(
-      this.socialService.resolveFriendRequest(
+    forkJoin({
+      friendRequest: this.socialService.resolveFriendRequest(
         username,
         isAccepted,
         this.currentUser.username
       ),
-      this.userService.getNotifications(this.currentUser)
-    ).subscribe(e => {
-      if (Array.isArray(e.data) && e.data) {
-        console.log(e.data);
-
-        this.friendRequest = [];
-        this.classify(e.data);
-      }
+      notifications: this.userService.getNotifications(this.currentUser),
+      friends: this.userService.getFriends()
+    }).subscribe(response => {
+      const { notifications, friends } = response;
+      console.log(response);
+      
+      // this.friendRequest = nto
+      // if (Array.isArray(e.data) && e.data) {
+      //   console.log(e.data);
+      //   this.friendRequest = [];
+      //   this.classify(e.data);
+      // }
     });
   }
 
@@ -113,17 +117,25 @@ export class SocialComponent implements OnInit {
     const requestedUser = 'rooter';
   }
 
+  getUserData() {
+    this.authService.currentUser
+      .pipe(
+        switchMap((user: User) => {
+          this.currentUser = user;
+          return forkJoin({
+            notifications: this.userService.getNotifications(this.currentUser),
+            friends: this.userService.getFriends()
+          });
+        })
+      )
+      .subscribe(response => {
+        const { notifications, friends } = response;
+        this.classify(notifications.data);
+        this.friends = friends.data;
+      });
+  }
+
   ngOnInit() {
-    this.currentUser = this.authService.currentUserValue;
-    concat(
-      this.userService.getNotifications(this.currentUser),
-      this.userService.getFriends()
-    ).subscribe(response => {
-      if (response.data.length > 0 && response.data[0].hasOwnProperty('type')) {
-        this.classify(response.data);
-        return;
-      }
-      this.friends = response.data;
-    });
+    this.getUserData();
   }
 }
