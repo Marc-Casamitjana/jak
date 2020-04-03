@@ -92,25 +92,37 @@ export class SocialComponent implements OnInit {
   }
 
   resolveRequest(username: string, isAccepted: boolean) {
-    forkJoin({
-      friendRequest: this.socialService.resolveFriendRequest(
-        username,
-        isAccepted,
-        this.currentUser.username
-      ),
-      notifications: this.userService.getNotifications(this.currentUser),
-      friends: this.userService.getFriends()
-    }).subscribe(response => {
-      const { notifications, friends } = response;
-      console.log(response);
-      
-      // this.friendRequest = nto
-      // if (Array.isArray(e.data) && e.data) {
-      //   console.log(e.data);
-      //   this.friendRequest = [];
-      //   this.classify(e.data);
-      // }
-    });
+    let friendResponse: boolean;
+    this.socialService
+      .resolveFriendRequest(username, isAccepted, this.currentUser.username)
+      .pipe(
+        switchMap(response => {
+          friendResponse = response.data;
+          return forkJoin({
+            notifications: this.userService.getNotifications(this.currentUser),
+            friends: this.userService.getFriends()
+          });
+        })
+      )
+      .subscribe(response => {
+        const { notifications, friends } = response;
+        console.log(response);
+      });
+    // forkJoin({
+    //   friendRequest: this.socialService.resolveFriendRequest(
+    //     username,
+    //     isAccepted,
+    //     this.currentUser.username
+    //   ),
+    //   notifications: this.userService.getNotifications(this.currentUser),
+    //   friends: this.userService.getFriends()
+    // })
+    // this.friendRequest = nto
+    // if (Array.isArray(e.data) && e.data) {
+    //   console.log(e.data);
+    //   this.friendRequest = [];
+    //   this.classify(e.data);
+    // }
   }
 
   openPrivate() {
