@@ -107,6 +107,7 @@ export class SocialComponent implements OnInit {
       .subscribe(response => {
         const { notifications, friends } = response;
         console.log(response);
+        this.friendRequest = notifications.data;
       });
     // forkJoin({
     //   friendRequest: this.socialService.resolveFriendRequest(
