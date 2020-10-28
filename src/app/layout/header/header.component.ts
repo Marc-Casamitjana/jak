@@ -4,13 +4,15 @@ import { AuthService, User } from '../../core/services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   @Output() openModalEvent: EventEmitter<string> = new EventEmitter();
   currentUser: User;
   openedButtons = false;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+  }
 
   openModal(type: string): void {
     this.openModalEvent.emit(type);
