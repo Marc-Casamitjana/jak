@@ -18,12 +18,15 @@ import { HeaderComponent } from './layout/header/header.component';
 import { SocialComponent } from './feature/social/social.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PrivatesComponent } from './feature/privates/privates.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 const appRoutes: Routes = [
   { path: 'room', component: ChatComponent },
   { path: 'privates', component: PrivatesComponent },
   { path: 'social', component: SocialComponent },
-  { path: '**', redirectTo: '/', pathMatch: 'full' }
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -33,7 +36,8 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config),
   ],
   declarations: [
     AppComponent,
@@ -46,16 +50,16 @@ const appRoutes: Routes = [
     ModalDirective,
     HeaderComponent,
     SocialComponent,
-    PrivatesComponent
+    PrivatesComponent,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, RegisterComponent]
+  entryComponents: [LoginComponent, RegisterComponent],
 })
 export class AppModule {}

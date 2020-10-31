@@ -4,25 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { Message } from './chat.component';
+import { GeneralMessage } from './types';
+import { Socket } from 'ngx-socket-io';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatService {
   private url = environment.API_URL;
-  private socket;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private socket: Socket) {}
 
-  connect() {
-    if (!this.socket) {
-      this.socket = io(this.url);
-    }
-  }
+  sendMessage(msg: GeneralMessage, id?: number) {
+    console.log(msg);
 
-  sendMessage(msg, id?) {
     this.socket.emit('add-message', msg);
     if (id) {
-      this.socket.emit('say to someone', msg, this.socket.id);
+      this.socket.emit('say to someone', msg);
     }
   }
 
@@ -31,8 +28,8 @@ export class ChatService {
   }
 
   getMessages(): Observable<Message> {
-    return new Observable<Message>(observer => {
-      this.socket.on('new-message', msg => {
+    return new Observable<Message>((observer) => {
+      this.socket.on('new-message', (msg) => {
         observer.next(msg);
       });
     });
