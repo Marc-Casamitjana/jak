@@ -3,12 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ChatService } from './chat.service';
 import { AuthService, User } from '../../core/services/auth.service';
 import { concat } from 'rxjs';
-
-export interface Message {
-  content: string;
-  date?: string;
-  user?: string;
-}
+import { GeneralMessage } from './types';
 
 @Component({
   selector: 'app-chat',
@@ -18,7 +13,7 @@ export interface Message {
 export class ChatComponent implements OnInit {
   chatForm: FormGroup;
   showChat: boolean;
-  messagesCollection: Message[] = [];
+  messagesCollection: GeneralMessage[] = [];
   currentUser: User;
 
   constructor(private chatService: ChatService, private auth: AuthService) {}
@@ -29,6 +24,7 @@ export class ChatComponent implements OnInit {
     this.chatForm = new FormGroup({
       input: new FormControl(''),
     });
+    this.chatService.enableSocket();
   }
 
   closeChat() {
@@ -56,7 +52,7 @@ export class ChatComponent implements OnInit {
     ).subscribe((msg: any) => {
       Array.isArray(msg)
         ? msg.forEach((e) => this.messagesCollection.push(e))
-        : this.messagesCollection.push(...msg);
+        : this.messagesCollection.push(msg);
     });
   }
 }

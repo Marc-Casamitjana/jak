@@ -3,16 +3,19 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
-import { Message } from './chat.component';
 import { GeneralMessage } from './types';
-import { Socket } from 'ngx-socket-io';
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
   private url = environment.API_URL;
+  private socket: SocketIOClient.Socket;
 
-  constructor(private http: HttpClient, private socket: Socket) {}
+  constructor(private http: HttpClient) {}
+
+  enableSocket() {
+    this.socket = io('http://localhost:3000');
+  }
 
   sendMessage(msg: GeneralMessage, id?: number) {
     console.log(msg);
@@ -23,13 +26,13 @@ export class ChatService {
     }
   }
 
-  getChatHistory(): Observable<Message[]> {
-    return this.http.get<Message[]>(`${this.url}/chat-history`);
+  getChatHistory(): Observable<GeneralMessage[]> {
+    return this.http.get<GeneralMessage[]>(`${this.url}/chat-history`);
   }
 
-  getMessages(): Observable<Message> {
-    return new Observable<Message>((observer) => {
-      this.socket.on('new-message', (msg) => {
+  getMessages(): Observable<GeneralMessage> {
+    return new Observable<GeneralMessage>((observer) => {
+      this.socket.on('new-message', (msg: GeneralMessage) => {
         observer.next(msg);
       });
     });
