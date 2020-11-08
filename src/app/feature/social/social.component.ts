@@ -8,11 +8,6 @@ import { flatMap, tap, switchMap, map } from 'rxjs/operators';
 import { UsersService, Notification } from '../users/users.service';
 import { concat, forkJoin } from 'rxjs';
 
-export interface UsersData {
-  currentUsername: string;
-  friendName: string;
-}
-
 @Component({
   selector: 'app-social',
   templateUrl: './social.component.html',
@@ -24,14 +19,14 @@ export interface UsersData {
         animate(
           '0.3s ease-in',
           style({ opacity: 1, transform: 'translateY(0%)' })
-        )
+        ),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
-        animate('1s ease-in', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+        animate('1s ease-in', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class SocialComponent implements OnInit {
   blur = false;
@@ -56,21 +51,8 @@ export class SocialComponent implements OnInit {
     this.newFriendMsg = undefined;
     this.newFriendError = undefined;
 
-    const usersData: UsersData = {
-      currentUsername: this.currentUser.username,
-      friendName: name
-    };
     this.socialService
-      .getFriend(usersData)
-      .pipe(
-        switchMap((response: HttpResponse) => {
-          const payload = {
-            requestedUser: response.data,
-            user: this.currentUser
-          };
-          return this.socialService.sendFriendRequest(payload);
-        })
-      )
+      .sendFriendRequest({ friendName: name, currentUser: this.currentUser })
       .subscribe(
         (msg: HttpResponse) => (this.newFriendMsg = msg.data),
         (err: HttpErrorResponse) => (this.newFriendError = err.error.data)
@@ -96,15 +78,15 @@ export class SocialComponent implements OnInit {
     this.socialService
       .resolveFriendRequest(username, isAccepted, this.currentUser.username)
       .pipe(
-        switchMap(response => {
+        switchMap((response) => {
           friendResponse = response.data;
           return forkJoin({
             notifications: this.userService.getNotifications(this.currentUser),
-            friends: this.userService.getFriends()
+            friends: this.userService.getFriends(),
           });
         })
       )
-      .subscribe(response => {
+      .subscribe((response) => {
         const { notifications, friends } = response;
         console.log(response);
         this.friendRequest = notifications.data;
@@ -137,11 +119,11 @@ export class SocialComponent implements OnInit {
           this.currentUser = user;
           return forkJoin({
             notifications: this.userService.getNotifications(this.currentUser),
-            friends: this.userService.getFriends()
+            friends: this.userService.getFriends(),
           });
         })
       )
-      .subscribe(response => {
+      .subscribe((response) => {
         const { notifications, friends } = response;
         this.classify(notifications.data);
         this.friends = friends.data;
